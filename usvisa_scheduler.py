@@ -38,7 +38,7 @@ REGEX_CONTINUE = Embassies[YOUR_EMBASSY][2]
 minute = 60
 hour = 60 * minute
 # Time between steps (interactions with forms)
-STEP_TIME = 0.5
+STEP_TIME = 1
 # Time between retries/checks for available dates (seconds)
 RETRY_TIME_L_BOUND = config['TIME'].getfloat('RETRY_TIME_L_BOUND')
 RETRY_TIME_U_BOUND = config['TIME'].getfloat('RETRY_TIME_U_BOUND')
@@ -55,11 +55,11 @@ def update_city(do_update):
     time.sleep(2)
     # Update FACILITY_ID based on the condition
     if do_update:
-        FACILITY_ID = 49
-        print("Checking Abu Dhabi")
-    else:
-        FACILITY_ID = 50
-        print("Checking Dubai")
+        FACILITY_ID = 89
+        print("Checking Calgary")
+    # else:
+    #     FACILITY_ID = 50
+    #     print("Checking Dubai")
 
     # Update URLs using the new FACILITY_ID
     DATE_URL = f"https://ais.usvisa-info.com/{EMBASSY}/niv/schedule/{SCHEDULE_ID}/appointment/days/{FACILITY_ID}.json?appointments[expedite]=false"
@@ -267,7 +267,7 @@ driver = webdriver.Chrome()
 
 def handle_no_dates():
     print("List is empty")
-    sleep_time = random.randint(RETRY_TIME_L_BOUND, RETRY_TIME_U_BOUND)
+    sleep_time = random.randint(int(RETRY_TIME_L_BOUND), int(RETRY_TIME_U_BOUND))
     print(f"Retry Wait Time: {sleep_time} seconds")
     time.sleep(sleep_time)
 
@@ -306,7 +306,7 @@ def rest_program():
 
 
 def retry_wait():
-    retry_time = random.randint(RETRY_TIME_L_BOUND, RETRY_TIME_U_BOUND)
+    retry_time = random.randint(int(RETRY_TIME_L_BOUND), int(RETRY_TIME_U_BOUND))
     print(f"Retry Wait Time: {retry_time} seconds")
     time.sleep(retry_time)
 
